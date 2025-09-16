@@ -1,0 +1,18 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    //Strongly typed view
+*@
+@model IEnumerable<WebApp.Models.User>;
+@{
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+    ViewBag.Title = "View Index";
+}
+<p>The view of action Index in MyNew</p>
+<P>View in sample</P>
+@foreach (var u in Model)
+{
+    <p>Id: @u.ID</p>
+    <p>Name: @u.Name</p>
+    <p>Email: @u.Email</p>
+    <p>Password: @u.Password</p>
+}
