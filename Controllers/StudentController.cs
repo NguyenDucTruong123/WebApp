@@ -37,7 +37,7 @@ namespace WebApp.Controllers
 
             };
          }
-        [Route("Add")]
+        [Route("add")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -55,7 +55,7 @@ namespace WebApp.Controllers
     };
             return View();
         }
-        [Route("Add")]
+        [Route("add")]
         [HttpPost]
         public IActionResult Create(Student s)
         {
