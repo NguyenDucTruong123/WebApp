@@ -16,7 +16,10 @@
     <!-- End Top nav -->
     <div id="layoutSidenav">
         <!-- Begin Left menu -->
-        <partial name="LeftMenu"/>
+        @* <partial name="LeftMenu"/> *@
+        <div id="layoutSidenav_nav">
+            @await Component.InvokeAsync("Render");
+         </div>
         <!-- End Left menu -->
         <!-- Begin Right content -->
         <div id="layoutSidenav_content">

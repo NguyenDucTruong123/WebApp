@@ -12,21 +12,28 @@ namespace WebApp.Controllers
         {
             listStudent = new List<Student>()
             {
-                new Student() { Id = 101, Name = "Hải Nam", Branch = Branch.IT,
-            Gender = Gender.Male, IsRegular = true,
-            Address = "A1-2018", Email = "nam@g.com" },
+                new Student() { Id = 101,
+                    Name = "Hải Nam", 
+                    Branch = Branch.IT,
+                    Gender = Gender.Male, 
+                    IsRegular = true, 
+                    Password="123" ,
+                    Address = "A1-2018",
+                    Email = "nam@g.com" , 
+                    Avatar="https://robohash.org/phamhuong.png?size=150x150" , 
+                    DateOfBorth=new DateTime(2003,5,23)},
 
-        new Student() { Id = 102, Name = "Minh Tú", Branch = Branch.BE,
-            Gender = Gender.Female, IsRegular = true,
-            Address = "A1-2019", Email = "tu@g.com" },
+        //new Student() { Id = 102, Name = "Minh Tú", Branch = Branch.BE,
+        //    Gender = Gender.Female, IsRegular = true,Password="123",
+        //    Address = "A1-2019", Email = "tu@g.com",Avatar=""},
 
-        new Student() { Id = 103, Name = "Hoàng Phong", Branch = Branch.CE,
-            Gender = Gender.Male, IsRegular = false,
-            Address = "A1-2020", Email = "phong@g.com" },
+        //new Student() { Id = 103, Name = "Hoàng Phong", Branch = Branch.CE,
+        //    Gender = Gender.Male, IsRegular = false,Password="123",
+        //    Address = "A1-2020", Email = "phong@g.com" ,Avatar=""},
 
-        new Student() { Id = 104, Name = "Xuân Mai", Branch = Branch.EE,
-            Gender = Gender.Female, IsRegular = false,
-            Address = "A1-2021", Email = "mai@g.com" }
+        //new Student() { Id = 104, Name = "Xuân Mai", Branch = Branch.EE,
+        //    Gender = Gender.Female, IsRegular = false, Password="123",
+        //    Address = "A1-2021", Email = "mai@g.com", Avatar="" }
 
             };
          }
@@ -52,8 +59,18 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult Create(Student s)
         {
-                s.Id = listStudent.Last<Student>().Id + 1;
-                listStudent.Add(s);
+            var student = new Student
+            {
+                Id = listStudent.Last<Student>().Id + 1,
+                Name = s.Name,
+                Email = s.Email,
+                Password = s.Password,
+                Avatar = s.Avatar,
+                Branch = s.Branch,
+                DateOfBorth = s.DateOfBorth,
+                Address = s.Address
+            };
+                listStudent.Add(student);
                 return View("Index", listStudent);
         }
         [Route("List")]
