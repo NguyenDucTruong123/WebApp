@@ -59,7 +59,12 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] StudentForm s)
         {
-            if (s.Avatar == null || s.Avatar.Length == 0)
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+                if (s.Avatar == null || s.Avatar.Length == 0)
             {
                 return BadRequest("Avatar khong hop le");
             }
