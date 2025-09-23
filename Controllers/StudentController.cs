@@ -57,15 +57,33 @@ namespace WebApp.Controllers
         }
         [Route("add")]
         [HttpPost]
-        public IActionResult Create(Student s)
+        public async Task<IActionResult> Create([FromForm] StudentForm s)
         {
+            if (s.Avatar == null || s.Avatar.Length == 0)
+            {
+                return BadRequest("Avatar khong hop le");
+            }
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            var fileName = Path.GetFileName(s.Avatar.FileName);
+            var filePath = Path.Combine(path, fileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await s.Avatar.CopyToAsync(stream);
+            }
+            var avatarUrl = $"{Request.Scheme}://{Request.Host}/images/{fileName}";
             var student = new Student
             {
                 Id = listStudent.Last<Student>().Id + 1,
                 Name = s.Name,
                 Email = s.Email,
                 Password = s.Password,
-                Avatar = s.Avatar,
+                Avatar = avatarUrl,
                 Branch = s.Branch,
                 DateOfBorth = s.DateOfBorth,
                 Address = s.Address
