@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace WebApp.Models
 {
@@ -26,13 +27,28 @@ namespace WebApp.Models
         public Branch? Branch { get; set; }
         [Required]
         public Gender? Gender { get; set; }
+        [Required(ErrorMessage = "Điểm là bắt buộc nhập")]
+        [Range(0.0, 10.0, ErrorMessage = "Điểm phải nằm trong khoảng từ 0.0 đến 10.0")]
+        public double? Score { get; set; }
         public bool IsRegular { get; set; }
-        [Range(typeof(DateTime),"1/1/1963","12/31/2024")]
-        [DataType(DataType.Date)]
         [Required]
+        [DataType(DataType.Date)]
+        [CustomValidation(typeof(MyValidator), "ValidateBirthDate")]
         public DateTime DateOfBorth { get; set; }
         [DataType(DataType.MultilineText)]
         [Required]
         public string? Address { get; set; }
+    }
+
+    public class MyValidator
+    {
+        public static ValidationResult ValidateBirthDate(DateTime date, ValidationContext context)
+        {
+            if (date < new DateTime(1963, 1, 1) || date > new DateTime(2024, 12, 31))
+            {
+                return new ValidationResult("Ngày sinh phải nằm trong khoảng 01/01/1963 - 31/12/2024");
+            }
+            return ValidationResult.Success;
+        }
     }
 }

@@ -11,6 +11,8 @@
         public Branch? Branch { get; set; }
         public Gender? Gender { get; set; }
         public bool IsRegular { get; set; }
+
+        public double? Score { get; set; }
         public DateTime DateOfBorth { get; set; }
         public string? Address { get; set; }
     }

@@ -90,6 +90,7 @@ namespace WebApp.Controllers
                 Password = s.Password,
                 Avatar = avatarUrl,
                 Branch = s.Branch,
+                Score = s.Score,
                 DateOfBorth = s.DateOfBorth,
                 Address = s.Address
             };

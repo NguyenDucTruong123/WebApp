@@ -15,6 +15,7 @@
     <th>Giới tính</th>
     <th>Avatar</th>
     <th>Hệ ĐT</th> 
+    <th>Điểm</th>
     <th>Địa chỉ</th> 
     <th>Email</th> 
     </tr> 
@@ -48,6 +49,7 @@
                 <td>@(s.Gender == Gender.Male ? "Nam" : "Nữ")</td>
                 <td><img src="@(s.Avatar)" alt="Alternate Text" class="w-100" /></td>
                 <td>@(s.IsRegular ? "Chính quy" : "Phi chính quy")</td>
+                <td>@s.Score</td>
                 <td>@s.Address</td>
                 <td>@s.Email</td>
             </tr>
